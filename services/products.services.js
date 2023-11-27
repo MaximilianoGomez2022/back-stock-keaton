@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId} from "mongodb"
-const client = new MongoClient('mongodb://127.0.0.1:27017')
+const client = new MongoClient('mongodb+srv://portfolio2023:Riverplate_SAG_1991@cluster0.ghun0gd.mongodb.net/?retryWrites=true&w=majority')
 
 async function traerDestacadas(){
     return client.connect()

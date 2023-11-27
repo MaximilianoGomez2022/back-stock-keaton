@@ -1,5 +1,5 @@
 import express from 'express'
-import cors from'cors'
+import cors from 'cors'
 import ProductosApiRoutes from './routes/products.api.routes'
 import SesionApiRoutes from './routes/sesion.api.routes'
 import UsersApiRoutes from './routes/users.api.routes'

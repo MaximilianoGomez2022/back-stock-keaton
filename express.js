@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from'cors'
-import TrabajosApiRoute from './api/routes/products.api.routes.js'
-import TecnologiasApiRoute from './api/routes/generos.api.routes.js'
+import ProductsApiRoute from './api/routes/products.api.routes.js'
 import UserApiRoute from './api/routes/users.api.routes.js'
 import SesionApiRoute from './api/routes/sesion.api.routes.js'
 
@@ -14,8 +13,7 @@ app.use(express.json())
 
 app.use('/', express.static('public'));
 
-app.use('/', TrabajosApiRoute)
-app.use('/', TecnologiasApiRoute)
+app.use('/', ProductsApiRoute)
 app.use('/', UserApiRoute)
 app.use('/', SesionApiRoute)
 

@@ -5,7 +5,7 @@ import { isLogin, isAdmin } from "../../middleware/auth.middleware.js"
 const route = express.Router()
 
 route.route('/api/products')
-.get([isLogin], ProductsApiController.findall)
+.get( ProductsApiController.findall)
 .post([isLogin, isAdmin],ProductsApiController.crearPelicula)
 
 route.route('/api/products/:id')

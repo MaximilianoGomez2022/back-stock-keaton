@@ -5,7 +5,7 @@ import { isLoginValid } from '../../middleware/userValid.middleware.js'
 const router = express.Router()
 
 router.route('/api/users/login')
-.post([isLoginValid],userController.login)
+.post(userController.login)
 
 router.route('/api/users/logout')
 .post(userController.logout)

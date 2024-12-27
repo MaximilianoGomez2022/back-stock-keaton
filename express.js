@@ -5,7 +5,6 @@ import UserApiRoute from './api/routes/users.api.routes.js'
 import SesionApiRoute from './api/routes/sesion.api.routes.js'
 
 const app = express();
-app.set('view engine', 'ejs')
 
 app.use(cors())
 app.use(express.urlencoded({extended:true}));

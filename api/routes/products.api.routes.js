@@ -6,7 +6,7 @@ const route = express.Router()
 
 route.route('/api/products')
 .get( ProductsApiController.findall)
-.post([isLogin, isAdmin],ProductsApiController.crearPelicula)
+.post(ProductsApiController.crearPelicula)
 
 route.route('/api/products/:id')
 .get([isLogin],ProductsApiController.findById)

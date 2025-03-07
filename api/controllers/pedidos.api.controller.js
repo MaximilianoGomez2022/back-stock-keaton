@@ -3,7 +3,7 @@ import *as PedidosServices from '../../services/pedidos.services.js'
 function crearPedido(req, res){
     const Pedido = {
         nombre : req.body.fecha,
-        productos: req.body.fecha
+        productos: req.body.productos
     }
 
     PedidosServices.guardarPedido(Pedido)

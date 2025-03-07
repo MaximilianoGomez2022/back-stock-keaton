@@ -25,7 +25,7 @@ async function traerTrabajos(filter){
     return client.connect()
     .then(async function(){
         const db = client.db('STOCK-KEATON')
-        return db.collection('Productos').find(filterQuery).toArray()
+        return db.collection('Pedidos').find(filterQuery).toArray()
     })
 }
 

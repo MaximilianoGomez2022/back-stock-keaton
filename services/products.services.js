@@ -33,7 +33,7 @@ async function traerPorId(id){
     return client.connect()
     .then(function(){
         const db = client.db('STOCK-KEATON')
-        return db.collection('Productos').findOne({ _id: new ObjectId(id) })
+        return db.collection('Pedidos').findOne({ _id: new ObjectId(id) })
     })
 }
 

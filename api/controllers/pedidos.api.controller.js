@@ -2,7 +2,7 @@ import *as PedidosServices from '../../services/pedidos.services.js'
 
 function crearPedido(req, res){
     const Pedido = {
-        nombre : req.body.fecha,
+        fecha : req.body.fecha,
         productos: req.body.productos
     }
 

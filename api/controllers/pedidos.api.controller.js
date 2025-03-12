@@ -14,8 +14,8 @@ function crearPedido(req, res){
 
 function traer(req, res){
     PedidosServices.traerPedidos()
-    .then(function(){
-        res.status(201).json()
+    .then(function(pedidos){
+        res.status(200).json(pedidos)
     })
 }
 

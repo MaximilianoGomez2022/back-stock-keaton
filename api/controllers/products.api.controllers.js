@@ -78,7 +78,7 @@ function editById(req, res){
     ProductsServices.editarPelicula(id, product)
     .then(function(product){
         if (product) {
-            res.status(200).json({messagge : "Producto editada con éxito."})
+            res.status(200).json({messagge : "Producto editado con éxito."})
         }   else {
             res.status(404).json({messagge : "Producto no encontrada"})
         } 

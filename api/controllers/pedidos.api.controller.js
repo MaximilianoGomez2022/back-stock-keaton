@@ -32,8 +32,31 @@ function traerPorId (req, res) {
     })
 }
 
+function editarPedido(req, res) {
+    const id = req.params.id
+    const pedido = {}
+
+    if (req.body.fecha) {
+        pedido.fecha = req.body.fecha
+    }
+
+    if (req.body.productos) {
+        pedido.productos = req.body.productos
+    }
+
+    PedidosServices.editarPedido(id, pedido)
+    .then(function(pedido){
+        if (pedido) {
+            res.status(200).json({messagge : "Pedido editado con éxito."})
+        }   else {
+            res.status(404).json({messagge : "Pedido no encontrado"})
+        } 
+    })
+}
+
 export {
     crearPedido,
     traer,
-    traerPorId
+    traerPorId,
+    editarPedido
 }

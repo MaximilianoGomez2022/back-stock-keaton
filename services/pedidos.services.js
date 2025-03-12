@@ -16,6 +16,16 @@ async function guardarPedido(pedido){
     })
 }
 
+async function traerPedidos(){
+
+    return client.connect()
+    .then(function(){
+        const db = client.db('STOCK-KEATON')
+        const pedidos = db.collection('Pedidos').find({}).toArray();
+    })
+}
+
 export {
-    guardarPedido
+    guardarPedido,
+    traerPedidos
 }

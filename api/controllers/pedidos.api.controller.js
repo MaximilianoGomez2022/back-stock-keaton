@@ -12,6 +12,14 @@ function crearPedido(req, res){
     })
 }
 
+function traerPedidos(req, res){
+    PedidosServices.traerPedidos()
+    .then(function(){
+        res.status(201).json()
+    })
+}
+
 export {
-    crearPedido
+    crearPedido,
+    traerPedidos
 }

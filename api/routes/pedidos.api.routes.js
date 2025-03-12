@@ -8,4 +8,7 @@ route.route('/api/pedidos')
 .get( PedidosApiController.traer)
 .post( PedidosApiController.crearPedido)
 
+route.route('/api/pedido/:id')
+.get( PedidosApiController.traerPorId )
+
 export default route

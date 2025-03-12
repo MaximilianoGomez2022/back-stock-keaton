@@ -25,7 +25,16 @@ async function traerPedidos(){
     })
 }
 
+async function traerPorId(id){
+    return client.connect()
+    .then(function(){
+        const db = client.db('STOCK-KEATON')
+        return db.collection('Pedidos').findOne({ _id: new ObjectId(id) })
+    })
+}
+
 export {
     guardarPedido,
-    traerPedidos
+    traerPedidos,
+    traerPorId
 }

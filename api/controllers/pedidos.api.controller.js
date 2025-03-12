@@ -19,7 +19,21 @@ function traer(req, res){
     })
 }
 
+function traerPorId (req, res) {
+    const id = req.params.id
+
+    PedidosServices.traerPorId(id)
+    .then(function(pedido){
+        if (pedido) {
+            res.status(200).json(pedido)
+        }   else {
+            res.status(404).json({messagge : "Pedido no encontrado"})
+        }       
+    })
+}
+
 export {
     crearPedido,
-    traer
+    traer,
+    traerPorId
 }

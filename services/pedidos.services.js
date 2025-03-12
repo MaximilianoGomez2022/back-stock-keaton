@@ -21,7 +21,7 @@ async function traerPedidos(){
     return client.connect()
     .then(function(){
         const db = client.db('STOCK-KEATON')
-        return db.collection('Pedidos').find().toArray()
+        return db.collection('Pedidos').find({}).toArray()
     })
 }
 

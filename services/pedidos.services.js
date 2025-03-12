@@ -33,8 +33,17 @@ async function traerPorId(id){
     })
 }
 
+async function editarPedido(id, pedido){
+        return client.connect()
+        .then(function(){
+            const db = client.db('STOCK-KEATON')
+            return db.collection('Pedidos').updateOne({_id: new ObjectId(id)}, {$set:pedido})
+        })
+}
+
 export {
     guardarPedido,
     traerPedidos,
-    traerPorId
+    traerPorId,
+    editarPedido
 }

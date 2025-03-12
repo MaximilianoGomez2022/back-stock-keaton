@@ -22,6 +22,7 @@ async function traerPedidos(){
     .then(function(){
         const db = client.db('STOCK-KEATON')
         const pedidos = db.collection('Pedidos').find().toArray();
+        return pedidos;
     })
 }
 

@@ -1,3 +1,4 @@
+import { json } from 'express'
 import *as PedidosServices from '../../services/pedidos.services.js'
 
 function crearPedido(req, res){
@@ -54,9 +55,21 @@ function editarPedido(req, res) {
     })
 }
 
+function eliminarPedido(req, res) {
+    const id = req.params.id
+    PedidosServices.eliminarPedido(id)
+    .then(function(pedido) {
+        if(pedido) {
+            res.status(200).json({messagge: "Pedido eliminado"})
+        }   else {
+            res.status(404).json({messagge: "Pedido no encontrado"})        }
+    })
+}
+
 export {
     crearPedido,
     traer,
     traerPorId,
-    editarPedido
+    editarPedido,
+    eliminarPedido
 }

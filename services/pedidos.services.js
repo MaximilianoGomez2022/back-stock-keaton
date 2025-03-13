@@ -41,9 +41,18 @@ async function editarPedido(id, pedido){
         })
 }
 
+async function eliminarPedido(id) {
+    return client.connect()
+    .then(function(){
+        const db = client.db('STOCK-KEATON')
+        return db.collection('Pedidos').deleteOne({_id: new ObjectId(id)})
+    })
+}
+
 export {
     guardarPedido,
     traerPedidos,
     traerPorId,
-    editarPedido
+    editarPedido,
+    eliminarPedido
 }

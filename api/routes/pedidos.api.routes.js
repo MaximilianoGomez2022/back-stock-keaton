@@ -11,6 +11,6 @@ route.route('/api/pedidos')
 route.route('/api/pedido/:id')
 .get( PedidosApiController.traerPorId )
 .patch( PedidosApiController.editarPedido)
-.delete (PedidosApiController.eliminarPedido)
+.delete( PedidosApiController.eliminarPedido)
 
 export default route

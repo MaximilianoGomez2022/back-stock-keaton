@@ -84,17 +84,27 @@ async function remove(id){
     await users.deleteOne({_id: new ObjectId(id)})
 }
 
-async function cambiarContraseña (id, user) {
-    const salt = await bcrypt.genSalt(10)
+async function cambiarContraseña(id, nuevaPassword) {
+    try {
+        await client.connect();
 
-    const passwordHash = await bcrypt.hash(user.password, salt)
+        // Generar un nuevo hash de la contraseña
+        const salt = await bcrypt.genSalt(10);
+        const passwordHash = await bcrypt.hash(nuevaPassword, salt);
 
-    user.password = passwordHash
+        // Actualizar la contraseña en la base de datos
+        const result = await users.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: { password: passwordHash } }
+        );
 
-    await client.connect()
-
-    await users.updateOne({_id: new ObjectId(id)}, {$set:user})
+        return result;
+    } catch (error) {
+        console.error("Error al actualizar la contraseña:", error);
+        throw new Error("Error en la base de datos");
+    }
 }
+
 
 export {
     find,

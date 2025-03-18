@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import *as usersService from '../../services/users.services.js'
 import * as tokenService from '../../services/token.services.js'
+import bcrypt from 'bcrypt'
 
 function login(req, res){
 
@@ -118,20 +119,36 @@ function remove(req, res) {
         })
 }
 
-    function cambiarContraseña(req, res) {
-    const id = req.params.id
-    const user = {}
-    user.nueva = req.body.nuevaPassword
-    usersService.editUser(id, user)
-    .then(function(user){
-        if (user) {
-            res.status(200).json({messagge : "User editado con éxito."})
-        }   else {
-            res.status(404).json({messagge : "User no encontrado"})
-        } 
-    })
+async function cambiarContraseña(req, res) {
+    try {
+        const { actualPassword, nuevaPassword } = req.body;
+        const id = req.params.id;
 
+        // Buscar el usuario en la base de datos
+        const user = await usersService.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+
+        // Verificar que la contraseña actual sea correcta
+        const isMatch = await bcrypt.compare(actualPassword, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "La contraseña actual es incorrecta" });
+        }
+
+        // Llamar al servicio para actualizar la contraseña
+        const result = await usersService.cambiarContraseña(id, nuevaPassword);
+
+        if (result.modifiedCount > 0) {
+            return res.status(200).json({ message: "Contraseña actualizada con éxito" });
+        } else {
+            return res.status(400).json({ message: "No se pudo actualizar la contraseña" });
+        }
+    } catch (error) {
+        console.error("Error al cambiar la contraseña:", error);
+        res.status(500).json({ message: "Error en el servidor" });
     }
+}
 
 export {
     find,

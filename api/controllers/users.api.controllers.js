@@ -118,37 +118,20 @@ function remove(req, res) {
         })
 }
 
-async function cambiarContraseña(req, res) {
-    try {
-        const actual = req.body.actual;
-        const nuevaPassword = req.body.nuevaPassword
+    function cambiarContraseña(req, res) {
+    const id = req.params.id
+    const user = {}
+    user.nueva = req.body.nuevaPassword
+    usersService.editUser(id, user)
+    .then(function(user){
+        if (user) {
+            res.status(200).json({messagge : "User editado con éxito."})
+        }   else {
+            res.status(404).json({messagge : "User no encontrado"})
+        } 
+    })
 
-        const user = await usersService.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: "Usuario no encontrado" });
-        }
-
-        // Verificar la contraseña actual
-        const isMatch = await bcrypt.compare(actual, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: "La contraseña actual es incorrecta" });
-        }
-
-        // Hashear la nueva contraseña
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(nuevaPassword, salt);
-
-        // Guardar la nueva contraseña
-        user.password = hashedPassword;
-        await user.save();
-
-        res.json({ message: "Contraseña actualizada correctamente" });
-
-    } catch (error) {
-        console.error("Error al cambiar contraseña:", error);
-        res.status(500).json({ message: "Error en el servidor" });
     }
-}
 
 export {
     find,

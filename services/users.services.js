@@ -63,11 +63,7 @@ async function create(user){
 
 async function editUser(id, user){
 
-    const salt = await bcrypt.genSalt(10)
-
-    const passwordHash = await bcrypt.hash(user.password, salt)
-
-    user.password = passwordHash
+    
 
     // Verificar la contraseña actual
     // const isMatch = await bcrypt.compare(currentPassword, user.password);
@@ -89,13 +85,13 @@ async function remove(id){
 }
 
 async function cambiarContraseña (id, user) {
-    await client.connect()
+    const salt = await bcrypt.genSalt(10)
 
-    //Verificar la contraseña actual
-    const isMatch = await bcrypt.compare(currentPassword, user.password);
-    if (!isMatch) {
-        return res.status(401).json({ message: "La contraseña actual es incorrecta" });
-    }
+    const passwordHash = await bcrypt.hash(user.password, salt)
+
+    user.password = passwordHash
+
+    await client.connect()
 
     await users.updateOne({_id: new ObjectId(id)}, {$set:user})
 }
@@ -106,5 +102,6 @@ export {
     create,
     editUser,
     remove,
-    login
+    login,
+    cambiarContraseña
 }

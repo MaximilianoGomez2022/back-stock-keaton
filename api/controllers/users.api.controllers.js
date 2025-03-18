@@ -121,7 +121,7 @@ function remove(req, res) {
 
 async function cambiarContraseña(req, res) {
     try {
-        const { actualPassword, nuevaPassword } = req.body;
+        const { actual, nuevaPassword } = req.body;
         const id = req.params.id;
 
         // Buscar el usuario en la base de datos
@@ -131,7 +131,7 @@ async function cambiarContraseña(req, res) {
         }
 
         // Verificar que la contraseña actual sea correcta
-        const isMatch = await bcrypt.compare(actualPassword, user.password);
+        const isMatch = await bcrypt.compare(actual, user.password);
         if (!isMatch) {
             return res.status(401).json({ message: "La contraseña actual es incorrecta" });
         }

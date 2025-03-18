@@ -69,6 +69,12 @@ async function editUser(id, user){
 
     user.password = passwordHash
 
+    // Verificar la contraseña actual
+    // const isMatch = await bcrypt.compare(currentPassword, user.password);
+    // if (!isMatch) {
+    //     return res.status(401).json({ message: "La contraseña actual es incorrecta" });
+    // }
+
     return client.connect()
     .then(function(){
         const db = client.db('STOCK-KEATON')
@@ -80,6 +86,18 @@ async function remove(id){
     await client.connect()
 
     await users.deleteOne({_id: new ObjectId(id)})
+}
+
+async function cambiarContraseña (id, user) {
+    await client.connect()
+
+    //Verificar la contraseña actual
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+        return res.status(401).json({ message: "La contraseña actual es incorrecta" });
+    }
+
+    await users.updateOne({_id: new ObjectId(id)}, {$set:user})
 }
 
 export {

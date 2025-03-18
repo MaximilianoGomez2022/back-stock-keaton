@@ -19,5 +19,8 @@ router.route('/api/users/:id')
 .patch(userController.editUser)
 .delete(userController.remove)
 
+router.route('/api/users/cambiarContraseñs/:id')
+.patch(userController.cambiarContraseña)
+
 export default router
 

@@ -9,12 +9,12 @@ route.route('/api/products')
 .post(ProductsApiController.crearPelicula)
 
 route.route('/api/products/:id')
-.get([isLogin],ProductsApiController.findById)
-.patch([isLogin, isAdmin],ProductsApiController.editById)
-.put([isLogin, isAdmin],ProductsApiController.replaceById)
-.delete([isLogin, isAdmin],ProductsApiController.deleteById)
+.get(ProductsApiController.findById)
+.patch(ProductsApiController.editById)
+.put(ProductsApiController.replaceById)
+.delete(ProductsApiController.deleteById)
 
 route.route('/api/historial')
-.post([isLogin, isAdmin],ProductsApiController.guardarHistorial)
+.post(ProductsApiController.guardarHistorial)
 
 export default route

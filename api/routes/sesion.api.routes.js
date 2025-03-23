@@ -5,8 +5,8 @@ import { isLogin, isAdmin } from "../../middleware/auth.middleware.js"
 const route = express.Router()
 
 route.route('/api/sesion')
-.get([isLogin, isAdmin], SesionApiController.findall)
-.post([isLogin, isAdmin],SesionApiController.crearSesion)
+.get(SesionApiController.findall)
+.post(SesionApiController.crearSesion)
 
 route.route('/api/sesion/:id')
 .patch(SesionApiController.editById)

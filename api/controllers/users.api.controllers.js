@@ -8,7 +8,11 @@ function login(req, res){
     usersService.login(req.body)
     .then(user => {
         
-        const token = jwt.sign({id: user._id, mail: user.mail}, 'clave-secreta')
+        const token = jwt.sign(
+            { id: user._id, mail: user.mail },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' } // Opcional: duración del token
+        )
         tokenService.create({ token, user_id: user._id })
         res.json({token, user})
         

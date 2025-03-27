@@ -11,7 +11,7 @@ function isLogin(req, res, next){
     }
 
     try {       
-        const payload = jwt.verify(token, 'clave-secreta')
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
         tokenService.findByToken(token)
             .then(tokenFound => {
                 if (!tokenFound) {
